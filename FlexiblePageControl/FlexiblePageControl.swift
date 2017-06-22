@@ -153,7 +153,14 @@ public class FlexiblePageControl: UIView {
     private func update() {
 
         var items:[ItemView] = []
-        for index in -2..<(displayCount+2) {
+        var startIndex = -2
+        var endIndex = displayCount + 2
+        if currentPage > displayCount {
+            let currentPageDotArrayIndex = displayCount / 2
+            startIndex = currentPage - currentPageDotArrayIndex - 2
+            endIndex = currentPage + displayCount - currentPageDotArrayIndex + 2
+        }
+        for index in startIndex..<endIndex {
             let item = ItemView(itemSize: itemSize, dotSize: dotSize, index: index)
             items.append(item)
         }
